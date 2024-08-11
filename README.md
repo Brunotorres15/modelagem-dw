@@ -197,32 +197,32 @@ Um tipo de entrega pode estar associado a várias vendas.
 
 ### Tabelas de Dimensão: ###
 
-**Cliente**
+**dim_cliente**
 
 ID_Cliente (INT, Chave Primária)
 Localizacao (VARCHAR)
 
-**Produto**
+**dim_produto**
 
 ID_Produto (INT, Chave Primária)
 Categoria (VARCHAR)
 Subcategoria (VARCHAR)
 Preco (DECIMAL)
 
-**Promoção**
+**dim_promocao**
 
 ID_Promocao (INT, Chave Primária)
 Periodo_Campanha (INT)
 Desconto_Oferecido (DECIMAL)
 
-**Entrega**
+**dim_entrega**
 
 ID_Entrega (INT, Chave Primária)
 Custo_Envio (DECIMAL)
 Prazo_Entrega (INT)
 Metodo_Entrega (VARCHAR)
 
-**Tempo**
+**dim_tempo**
 
 ID_Tempo (INT, Chave Primária)
 Data (DATE)
@@ -232,7 +232,7 @@ Dia_Semana (VARCHAR)
 
 ### Tabela Fato: ###
 
-**Vendas**
+**fato_vendas**
 
 ID_Venda (INT, Chave Primária)
 
@@ -257,32 +257,32 @@ Quantidade (INT)
 Obs: A Sintaxe deste modelo físico foi feita para um banco de dados PostgreSQL
 
 ```
-CREATE TABLE Cliente (
+CREATE TABLE dim_cliente (
     ID_Cliente SERIAL PRIMARY KEY,
     Localizacao VARCHAR(255)
 );
 
-CREATE TABLE Produto (
+CREATE TABLE dim_produto (
     ID_Produto SERIAL PRIMARY KEY,
     Categoria VARCHAR(255),
     Subcategoria VARCHAR(255),
     Preco DECIMAL(10, 2)
 );
 
-CREATE TABLE Promocao (
+CREATE TABLE dim_promocao (
     ID_Promocao SERIAL PRIMARY KEY,
     Periodo_Campanha INT,
     Desconto_Oferecido DECIMAL(10, 2)
 );
 
-CREATE TABLE Entrega (
+CREATE TABLE dim_entrega (
     ID_Entrega SERIAL PRIMARY KEY,
     Custo_Envio DECIMAL(10, 2),
     Prazo_Entrega INT,
     Metodo_Entrega VARCHAR(255)
 );
 
-CREATE TABLE Tempo (
+CREATE TABLE dim_tempo (
     ID_Tempo SERIAL PRIMARY KEY,
     Data DATE,
     Mes INT,
@@ -290,7 +290,7 @@ CREATE TABLE Tempo (
     Dia_Semana VARCHAR(255)
 );
 
-CREATE TABLE Vendas (
+CREATE TABLE fato_vendas (
     ID_Venda SERIAL PRIMARY KEY,
     ID_Cliente INT REFERENCES Cliente(ID_Cliente),
     ID_Produto INT REFERENCES Produto(ID_Produto),
